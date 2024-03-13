@@ -8,6 +8,10 @@ type AppError struct {
 	LogError string
 }
 
-func InternalServerError(logError string) AppError {
+func (err AppError) Error() string {
+	return err.Message
+}
+
+func InternalServerError(logError string) error {
 	return AppError{Code: http.StatusInternalServerError, Message: "unexpected error", LogError: logError}
 }
